@@ -15,11 +15,6 @@ type cacheEntry struct {
 	val       []byte
 }
 
-type ReadWrite interface {
-	Add(key string, val []byte)
-	Get(key string) ([]byte, bool)
-}
-
 func NewCache(interval time.Duration) PokeCache {
 	cache := PokeCache{
 		data: make(map[string]cacheEntry),

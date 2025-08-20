@@ -23,7 +23,7 @@ func (pokeClient *PokeClient) ListLocationAreas(pageUrl *string) (PokeAPIListRes
 		return listRes, nil
 	}
 
-	res, err := sendHttpRequest(pokeClient, http.MethodGet, url, nil, nil)
+	res, err := pokeClient.sendHttpRequest(http.MethodGet, url, nil, nil)
 	if err != nil {
 		return PokeAPIListResponse{}, err
 	}

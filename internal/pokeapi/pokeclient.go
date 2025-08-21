@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"time"
 
@@ -52,6 +53,14 @@ func (pokeClient *PokeClient) sendHttpRequest(method, url string, body interface
 	res, err := pokeClient.httpClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error executing the request: %v", err)
+	}
+
+	if res.StatusCode != http.StatusOK {
+		data, err := io.ReadAll(res.Body)
+		if err != nil {
+			return nil, fmt.Errorf("error reading body: %v", err)
+		}
+		return nil, fmt.Errorf("http error response:\n  status:  %s\n  message: %s", res.Status, string(data))
 	}
 
 	return res, nil

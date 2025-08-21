@@ -22,6 +22,11 @@ func runRepl(cfg *config) {
 
 		commandName := input[0]
 
+		args := []string{}
+		if len(input) > 1 {
+			args = input[1:]
+		}
+
 		cmd, exists := getCommands()[commandName]
 
 		if !exists {
@@ -30,7 +35,7 @@ func runRepl(cfg *config) {
 			continue
 		}
 
-		if err := cmd.callback(cfg); err != nil {
+		if err := cmd.callback(cfg, args...); err != nil {
 			fmt.Printf("%v", err)
 			fmt.Println()
 		}
@@ -41,7 +46,7 @@ func runRepl(cfg *config) {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config) error
+	callback    func(*config, ...string) error
 }
 
 func getCommands() map[string]cliCommand {

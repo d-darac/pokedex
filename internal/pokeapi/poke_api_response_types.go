@@ -5,7 +5,7 @@ type PokeAPIBaseResource struct {
 	Name string `json:"name"`
 }
 
-type PokeAPIListResponse struct {
+type PokeAPINamedList struct {
 	Count    int     `json:"count"`
 	Next     *string `json:"next"`
 	Previous *string `json:"previous"`

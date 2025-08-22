@@ -7,7 +7,7 @@ import (
 
 func commandExplore(cfg *config, args ...string) error {
 	if len(args) == 0 {
-		return errors.New("missing argument location_area_name\nusage:\n\texplore <location_area_name>")
+		return errors.New("missing argument location_area_name\nusage:\nexplore <location_area_name>")
 	}
 
 	locationArea := args[0]

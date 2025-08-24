@@ -8,4 +8,5 @@ type config struct {
 	nextLocationsURL *string
 	prevLocationsURL *string
 	pokeapiClient    pokeapi.PokeClient
+	caughtPokemon    map[string]pokeapi.PokeAPIPokemon
 }

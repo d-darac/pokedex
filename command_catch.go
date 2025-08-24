@@ -24,21 +24,23 @@ func commandCatch(cfg *config, args ...string) error {
 		return err
 	}
 
-	catchPokemon(pokemonName, pokemonSpecies.CaptureRate, 100)
+	fmt.Printf("Throwing a Pokeball at %s...\n", pokemonName)
+	if caught := catchPokemon(pokemonName, pokemonSpecies.CaptureRate, 100); caught {
+		cfg.caughtPokemon[pokemonName] = pokemon
+		fmt.Printf("%s was caught!\n", pokemonName)
+		return nil
+	}
 
+	fmt.Printf("%s escaped!\n", pokemonName)
 	return nil
 }
 
-func catchPokemon(pokemonName string, catchRate, currentHealth int) {
-	fmt.Printf("Throwing a Pokeball at %s...\n", pokemonName)
+func catchPokemon(pokemonName string, catchRate, currentHealth int) bool {
 	catchProbability := calcCatchProbability(float64(catchRate), float64(currentHealth))
+	fmt.Printf("You have a %.2f%% chance of catching %s\n", catchProbability*100, pokemonName)
 	numPossibilities := (1 / catchProbability) / 100
 	rand := math.Floor(randFloat64n(numPossibilities)*100) / 100
-	if rand == 0 {
-		fmt.Printf("%s was caught!\n", pokemonName)
-		return
-	}
-	fmt.Printf("%s escaped!\n", pokemonName)
+	return rand == 0
 }
 
 func calcCatchProbability(catchRate float64, healthPercent float64) float64 {

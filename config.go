@@ -5,8 +5,9 @@ import (
 )
 
 type config struct {
-	nextLocationsURL *string
-	prevLocationsURL *string
-	pokeapiClient    pokeapi.PokeClient
-	caughtPokemon    map[string]pokeapi.PokeAPIPokemon
+	nextLocationsURL    *string
+	prevLocationsURL    *string
+	pokeapiClient       pokeapi.PokeClient
+	caughtPokemon       map[string]pokeapi.PokeAPIPokemon
+	commandsDefaultArgs map[string]map[string][]string
 }

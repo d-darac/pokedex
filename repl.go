@@ -20,7 +20,7 @@ func runRepl(cfg *config) {
 			continue
 		}
 
-		commandName := input[0]
+		commandName := strings.ToLower(input[0])
 
 		args := []string{}
 		if len(input) > 1 {
@@ -71,6 +71,11 @@ func getCommands() map[string]cliCommand {
 			description: "Displays a help message.",
 			callback:    commandHelp,
 		},
+		"inspect": {
+			name:        "inspect <pokemon_name>",
+			description: "Displays details about the given caught pokemon.",
+			callback:    commandInspect,
+		},
 		"map": {
 			name:        "map",
 			description: "Displays a list of location area with 20 lines per page. Eachs subsequent call to map command displays the next 20 locations.",
@@ -85,6 +90,6 @@ func getCommands() map[string]cliCommand {
 }
 
 func cleanInput(text string) []string {
-	words := strings.Fields(strings.ToLower(text))
+	words := strings.Fields(text)
 	return words
 }

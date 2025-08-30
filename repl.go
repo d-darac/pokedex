@@ -86,6 +86,11 @@ func getCommands() map[string]cliCommand {
 			description: "Same as the map command, but displays the previous 20 locations. Used to traverse the list backwards.",
 			callback:    commandMapb,
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Displays a list of caught pokemon.",
+			callback:    commandPokedex,
+		},
 	}
 }
 
